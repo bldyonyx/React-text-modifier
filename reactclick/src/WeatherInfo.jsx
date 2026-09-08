@@ -93,47 +93,56 @@ export default function WeatherInfo() {
   const WeatherIcon = weatherInfo ? weatherInfo.Icon : Cloud
 
   return (
-    <section className="weather-card">
-      <div className="weather-search">
+    <section className="w-full max-w-[420px] rounded-lg border border-[#d7dce5] bg-white p-5 shadow-lg">
+      <div className="mb-3.5 flex gap-2.5 max-[480px]:flex-col">
         <input
+          className="min-w-0 flex-1 rounded-md border border-[#d7dce5] px-3 py-2.5 text-[#1f2937]"
           type="text"
           value={searchCity}
           onChange={(event) => setSearchCity(event.target.value)}
           placeholder="Chercher une ville"
         />
-        <button type="button" onClick={searchWeather} className="search-button">
+        <button
+          type="button"
+          onClick={searchWeather}
+          className="flex items-center gap-2 rounded-md bg-[#a685b1] px-4 py-2.5 text-white hover:bg-[#d870ba] max-[480px]:justify-center"
+        >
           <Search size={18} />
           Rechercher
         </button>
       </div>
 
-      {errorMessage && <p className="weather-error">{errorMessage}</p>}
+      {errorMessage && (
+        <p className="mb-3.5 font-semibold text-[#c2416b]">{errorMessage}</p>
+      )}
 
       {weather ? (
-        <div className="weather-content">
-          <h2>
+        <div className="flex flex-col gap-4">
+          <h2 className="m-0 flex items-center justify-center gap-2 text-[#1f2937]">
             <MapPin size={22} />
             {cityName}
           </h2>
 
-          <div className="weather-sky">
-            <WeatherIcon size={42} />
-            <p>{weatherInfo.description}</p>
-            <div className="weather-main-temperature">
+          <div className="rounded-lg bg-[#f4f1fb] p-4 text-center text-[#667399]">
+            <WeatherIcon size={42} className="mx-auto" />
+            <p className="mt-2 font-bold text-[#1f2937]">
+              {weatherInfo.description}
+            </p>
+            <div className="mt-2.5 text-4xl font-extrabold leading-none text-[#667399]">
               {weather.temperature_2m} °C
             </div>
           </div>
 
-          <div className="weather-grid">
-            <p>
+          <div className="grid gap-2.5">
+            <p className="flex items-center gap-2 rounded-md bg-slate-50 p-2.5 text-[#1f2937]">
               <Thermometer size={18} />
               Ressenti : {weather.apparent_temperature} °C
             </p>
-            <p>
+            <p className="flex items-center gap-2 rounded-md bg-slate-50 p-2.5 text-[#1f2937]">
               <Droplets size={18} />
               Humidité : {weather.relative_humidity_2m} %
             </p>
-            <p>
+            <p className="flex items-center gap-2 rounded-md bg-slate-50 p-2.5 text-[#1f2937]">
               <Wind size={18} />
               Vent : {weather.wind_speed_10m} km/h
             </p>
